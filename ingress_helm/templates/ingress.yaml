@@ -1,0 +1,18 @@
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+   name: nginx
+   namespace: default
+spec:
+   tls:
+     - secretName: nuthan-com-tls
+       hosts:
+         - nuthan.com
+   rules:
+     - host: nuthan.com
+       http:
+         paths:
+           - backend:
+                serviceName: nginx
+                servicePort: 80
