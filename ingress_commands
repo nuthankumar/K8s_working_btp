@@ -1,0 +1,18 @@
+minikube addons list
+minikube addons enable ingress
+kubectl get pods -n kube-system
+kubectl run nginx --image=nginx
+kubectl expose deployment nginx --port 80
+vim ingress.yml
+sudo apt install vim
+kubectl apply -f ingress.yml 
+echo "$(minikube ip) nuthan.com" |sudo tee -a /etc/hosts
+cat /etc/hosts | tail -n 1
+
+curl nuthan.com
+
+openssl req -x509 -newkey rsa:4096 -sha256 -nodes -keyout tls.key -out tls.crt -subj "/CN=nuthan.com" -days 365
+
+kubectl create secret tls nuthan-com-tls --cert=tls.crt --key=tls.key --namespace=nuthan
+
+curl -k https://nuthan.com
