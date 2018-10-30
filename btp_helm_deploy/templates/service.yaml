@@ -1,0 +1,31 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mysql
+  namespace: test-btp
+spec:
+  ports:
+  - port: 3306
+  selector:
+    app: mysql
+  clusterIP: None
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    run: btp
+  name: btp-service
+  namespace: test-btp
+spec:
+  externalTrafficPolicy: Cluster
+  ports:
+  - nodePort: 31942
+    port: 8888
+    protocol: TCP
+    targetPort: 8888
+  selector:
+    run: btp
+  sessionAffinity: None
+  type: NodePort

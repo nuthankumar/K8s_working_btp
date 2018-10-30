@@ -3,7 +3,7 @@ apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
    name: nginx
-   namespace: test-ingress
+   namespace: test-btp
 spec:
    tls:
      - secretName: nuthan-com-tls
